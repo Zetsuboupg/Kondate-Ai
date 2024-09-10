@@ -1,0 +1,10 @@
+<!-- show.html.erb -->
+<h1>今日の献立提案</h1>
+
+<p>以下の献立を提案します:</p>
+
+<pre>
+<%= @recipe_suggestions %>
+</pre>
+
+<%= link_to '別の提案を受ける', new_recipe_path %>

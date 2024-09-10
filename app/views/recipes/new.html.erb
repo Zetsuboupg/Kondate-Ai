@@ -1,0 +1,11 @@
+<h1>Recipes#new</h1>
+<p>Find me in app/views/recipes/new.html.erb</p>
+
+<!-- new.html.erb -->
+<h1>今日の献立を提案します</h1>
+
+<%= form_with url: recipes_path, method: :post, local: true, data: { turbo: false } do %>
+  <label for="ingredients">冷蔵庫にある食材を入力してください:</label>
+  <%= text_field_tag :ingredients, '', placeholder: "例: トマト、チーズ、卵" %>
+  <%= submit_tag "献立を提案する" %>
+<% end %>
