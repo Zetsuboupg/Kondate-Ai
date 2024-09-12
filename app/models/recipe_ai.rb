@@ -2,10 +2,10 @@ require 'httparty'
 require 'json'
 
 class RecipeAi
-  OPENAI_API_KEY = 'わたしのkey'
+  OPENAI_API_KEY = ENV['OPENAI_API_KEY'] # 環境変数からAPIキーを読み込む
 
   def self.suggest_recipes(ingredients)
-    prompt = "Suggest 3 meal options using the following ingredients: #{ingredients}. Provide two options that might require additional shopping, and one or two that can be made with these ingredients only."
+    prompt = "以下の食材を使って、3つの献立を提案してください: #{ingredients}。1つは現在の食材のみで作れるメニュー、2つは追加の買い物が必要なメニューを提案してください。"
 
     response = HTTParty.post(
       "https://api.openai.com/v1/chat/completions", # エンドポイントを修正
@@ -14,12 +14,12 @@ class RecipeAi
         "Content-Type" => "application/json"
       },
       body: {
-        model: "gpt-4", # モデル指定
+        model: "gpt-3.5-turbo", # モデル指定
         messages: [
           { role: "system", content: "You are a helpful assistant." },
           { role: "user", content: prompt }
         ],
-        max_tokens: 150
+        max_tokens: 1000
       }.to_json
     )
 
